@@ -1,10 +1,12 @@
 package com.gt.clinica.models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Medico{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,22 +24,32 @@ public class Medico{
 	@Column(nullable = false)
 	private String senha;
 
-	public Medico(String nome, String cpf, String email, String senha) {
-		// TODO Auto-generated constructor stub
-		this.nome = nome;
-		this.cpf = cpf;
-		this.email = email;
-		this.senha = senha;
-		
-	}
 
+	/**
+	 * @param idMedico
+	 * @param nome
+	 * @param cpf
+	 * @param email
+	 * @param senha
+	 */
 	public Medico(Long idMedico, String nome, String cpf, String email, String senha) {
+		super();
 		this.idMedico = idMedico;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
 	}
+
+
+	/**
+	 * 
+	 */
+	public Medico() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public String getNome() {
 		// TODO Auto-generated method stub
@@ -63,7 +75,7 @@ public class Medico{
 	}
 
 	
-	public Long getIdEnfermeiro() {
+	public Long getIdMedico() {
 		return idMedico;
 	}
 
@@ -75,7 +87,7 @@ public class Medico{
 		return senha;
 	}
 
-	public void setIdEnfermeiro(Long idMedico) {
+	public void setIdMedico(Long idMedico) {
 		this.idMedico = idMedico;
 	}
 
@@ -89,7 +101,7 @@ public class Medico{
 
 	@Override
 	public String toString() {
-		return "Enfermeiro [idMedico=" + idMedico + ",nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha + "]";
+		return "Médico [idMedico=" + idMedico + ",nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha + "]";
 	}
 
 	@Override

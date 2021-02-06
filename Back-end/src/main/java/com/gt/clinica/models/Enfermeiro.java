@@ -1,10 +1,12 @@
 package com.gt.clinica.models;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Enfermeiro{
 	
 	@Id
@@ -23,15 +25,31 @@ public class Enfermeiro{
 	@Column(nullable = false)
 	private String senha;
 
-	public Enfermeiro(String nome, String cpf, String email, String senha) {
-		// TODO Auto-generated constructor stub
+	
+	
+	/**
+	 * @param idEnfermeiro
+	 * @param nome
+	 * @param cpf
+	 * @param email
+	 * @param senha
+	 */
+	public Enfermeiro(Long idEnfermeiro, String nome, String cpf, String email, String senha) {
+		super();
+		this.idEnfermeiro = idEnfermeiro;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
 		this.senha = senha;
-		
 	}
 
+	/**
+	 * 
+	 */
+	public Enfermeiro() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 
 	public String getNome() {

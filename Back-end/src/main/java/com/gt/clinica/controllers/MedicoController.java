@@ -1,8 +1,13 @@
 package com.gt.clinica.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,45 +20,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gt.clinica.DAO.PacienteDAO;
-import com.gt.clinica.models.Paciente;
+import com.gt.clinica.DAO.EnfermeiroDAO;
+import com.gt.clinica.DAO.MedicoDAO;
+import com.gt.clinica.models.Enfermeiro;
+import com.gt.clinica.models.Medico;
+
 
 @RestController
-@RequestMapping("/pacientes")
-public class PacienteController {
+@RequestMapping("/medicos")
+public class MedicoController{
 	@Autowired
-	private PacienteDAO pacienteDAO;
+	private MedicoDAO medicoDAO;
 	
 	@GetMapping
-	public List<Paciente> listar() {
-		return pacienteDAO.findAll();
+	public List<Medico> listar() {
+		return medicoDAO.findAll();
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Paciente cadastrar(@RequestBody Paciente paciente) {
-		return pacienteDAO.save(paciente);
+	public Medico cadastrar(@RequestBody Medico medico) {
+		return medicoDAO.save(medico);
 	}
 	
 	@GetMapping(path= {"/{id}"})
-	public ResponseEntity<Paciente> buscarPorId(@PathVariable("id") Long id) {
-		return pacienteDAO.findById(id)
+	public ResponseEntity<Medico> buscarPorId(@PathVariable("id") Long id) {
+		return medicoDAO.findById(id)
 				.map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	
 	@PutMapping(path= {"/{id}"})
-	public ResponseEntity<Paciente> alterarPorId(@PathVariable("id") Long id, @RequestBody Paciente paciente){
-		return pacienteDAO.findById(id)
+	public ResponseEntity<Medico> alterarPorId(@PathVariable("id") Long id, @RequestBody Medico medico){
+		return medicoDAO.findById(id)
 				.map(record ->{
-					record.setNome(paciente.getNome());
-					record.setCpf(paciente.getCpf());
-					record.setDataNasc(paciente.getDataNasc());
-					record.setPeso(paciente.getPeso());
-					record.setAltura(paciente.getAltura());
-					record.setUf(paciente.getUf());
-					return ResponseEntity.ok().body(pacienteDAO.save(record));
+					record.setNome(medico.getNome());
+					record.setCpf(medico.getCpf());
+					record.setEmail(medico.getEmail());
+					record.setSenha(medico.getSenha());
+					return ResponseEntity.ok().body(medicoDAO.save(record));
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -61,16 +67,11 @@ public class PacienteController {
 	
 	@DeleteMapping(path = {"/{id}"})
 	public ResponseEntity<?> excluirPorId(@PathVariable("id") Long id){
-		return pacienteDAO.findById(id)
+		return medicoDAO.findById(id)
 				.map(record -> {
-					pacienteDAO.deleteById(id);
+					medicoDAO.deleteById(id);
 					return ResponseEntity.ok().build();
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
-	
-
 }
-
-

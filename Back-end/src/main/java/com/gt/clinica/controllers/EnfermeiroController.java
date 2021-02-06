@@ -15,45 +15,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gt.clinica.DAO.PacienteDAO;
-import com.gt.clinica.models.Paciente;
+import com.gt.clinica.DAO.EnfermeiroDAO;
+import com.gt.clinica.models.Enfermeiro;
 
 @RestController
-@RequestMapping("/pacientes")
-public class PacienteController {
+@RequestMapping("/enfermeiros")
+public class EnfermeiroController {
 	@Autowired
-	private PacienteDAO pacienteDAO;
+	private EnfermeiroDAO enfermeiroDAO;
 	
 	@GetMapping
-	public List<Paciente> listar() {
-		return pacienteDAO.findAll();
+	public List<Enfermeiro> listar() {
+		return enfermeiroDAO.findAll();
 	}
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Paciente cadastrar(@RequestBody Paciente paciente) {
-		return pacienteDAO.save(paciente);
+	public Enfermeiro cadastrar(@RequestBody Enfermeiro enfermeiro) {
+		return enfermeiroDAO.save(enfermeiro);
 	}
 	
 	@GetMapping(path= {"/{id}"})
-	public ResponseEntity<Paciente> buscarPorId(@PathVariable("id") Long id) {
-		return pacienteDAO.findById(id)
+	public ResponseEntity<Enfermeiro> buscarPorId(@PathVariable("id") Long id) {
+		return enfermeiroDAO.findById(id)
 				.map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
 	
 	
 	@PutMapping(path= {"/{id}"})
-	public ResponseEntity<Paciente> alterarPorId(@PathVariable("id") Long id, @RequestBody Paciente paciente){
-		return pacienteDAO.findById(id)
+	public ResponseEntity<Enfermeiro> alterarPorId(@PathVariable("id") Long id, @RequestBody Enfermeiro enfermeiro){
+		return enfermeiroDAO.findById(id)
 				.map(record ->{
-					record.setNome(paciente.getNome());
-					record.setCpf(paciente.getCpf());
-					record.setDataNasc(paciente.getDataNasc());
-					record.setPeso(paciente.getPeso());
-					record.setAltura(paciente.getAltura());
-					record.setUf(paciente.getUf());
-					return ResponseEntity.ok().body(pacienteDAO.save(record));
+					record.setNome(enfermeiro.getNome());
+					record.setCpf(enfermeiro.getCpf());
+					record.setEmail(enfermeiro.getEmail());
+					record.setSenha(enfermeiro.getSenha());
+					return ResponseEntity.ok().body(enfermeiroDAO.save(record));
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
@@ -61,16 +59,13 @@ public class PacienteController {
 	
 	@DeleteMapping(path = {"/{id}"})
 	public ResponseEntity<?> excluirPorId(@PathVariable("id") Long id){
-		return pacienteDAO.findById(id)
+		return enfermeiroDAO.findById(id)
 				.map(record -> {
-					pacienteDAO.deleteById(id);
+					enfermeiroDAO.deleteById(id);
 					return ResponseEntity.ok().build();
 				})
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
-	
+
 
 }
-
-

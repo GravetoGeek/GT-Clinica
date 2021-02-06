@@ -33,17 +33,36 @@ public class Paciente{
 	private String uf;
 	
 	
-	public Paciente(Long idPaciente, String nome, String cpf, String dataNasc,double peso, double altura, String uf) {
-		// TODO Auto-generated constructor stub
+	/**
+	 * @param idPaciente
+	 * @param nome
+	 * @param cpf
+	 * @param dataNasc
+	 * @param peso
+	 * @param altura
+	 * @param uf
+	 */
+	public Paciente(Long idPaciente, String nome, String cpf, LocalDate dataNasc, double peso, double altura,
+			String uf) {
 		super();
+		this.idPaciente = idPaciente;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.dataNasc = LocalDate.parse(dataNasc);
-		this.idPaciente = idPaciente;
+		this.dataNasc = dataNasc;
 		this.peso = peso;
 		this.altura = altura;
 		this.uf = uf;
 	}
+
+
+	/**
+	 * 
+	 */
+	public Paciente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public String getNome() {
 		// TODO Auto-generated method stub
