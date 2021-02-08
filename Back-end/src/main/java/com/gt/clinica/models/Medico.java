@@ -1,17 +1,20 @@
 package com.gt.clinica.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
 public class Medico{
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idMedico;
-	
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long idmedico;
+
 	@Column(nullable = false)
 	private String nome;
 	
@@ -20,35 +23,32 @@ public class Medico{
 	
 	@Column(nullable = false)
 	private String email;
-	
 	@Column(nullable = false)
 	private String senha;
+	
 
-
-	/**
-	 * @param idMedico
-	 * @param nome
-	 * @param cpf
-	 * @param email
-	 * @param senha
-	 */
-	public Medico(Long idMedico, String nome, String cpf, String email, String senha) {
-		super();
-		this.idMedico = idMedico;
-		this.nome = nome;
-		this.cpf = cpf;
+	public Medico(String email, String senha, String nome, String cpf) {
 		this.email = email;
 		this.senha = senha;
+		this.nome = nome;
+		this.cpf = cpf;
 	}
 
 
-	/**
-	 * 
-	 */
+
+
+
+
+
 	public Medico() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
+
+
+
 
 
 	public String getNome() {
@@ -74,22 +74,16 @@ public class Medico{
 		this.cpf = cpf;
 	}
 
-	
-	public Long getIdMedico() {
-		return idMedico;
-	}
+
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public String getSenha() {
-		return senha;
+		return this.senha;
 	}
 
-	public void setIdMedico(Long idMedico) {
-		this.idMedico = idMedico;
-	}
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -99,10 +93,13 @@ public class Medico{
 		this.senha = senha;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Médico [idMedico=" + idMedico + ",nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha + "]";
+		return "Medico [nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha + "]";
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {

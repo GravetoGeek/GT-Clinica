@@ -1,5 +1,6 @@
 package com.gt.clinica.models;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +9,10 @@ import javax.persistence.Id;
 
 @Entity
 public class Enfermeiro{
-	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idEnfermeiro;
-	
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Long idenfermeiro;
+		
 	@Column(nullable = false)
 	private String nome;
 	
@@ -21,31 +21,18 @@ public class Enfermeiro{
 	
 	@Column(nullable = false)
 	private String email;
-	
 	@Column(nullable = false)
 	private String senha;
-
 	
-	
-	/**
-	 * @param idEnfermeiro
-	 * @param nome
-	 * @param cpf
-	 * @param email
-	 * @param senha
-	 */
-	public Enfermeiro(Long idEnfermeiro, String nome, String cpf, String email, String senha) {
-		super();
-		this.idEnfermeiro = idEnfermeiro;
-		this.nome = nome;
-		this.cpf = cpf;
+	public Enfermeiro(String email, String senha, Long idEnfermeiro, String nome, String cpf) {
 		this.email = email;
 		this.senha = senha;
+		this.nome = nome;
+		this.cpf = cpf;
 	}
-
-	/**
-	 * 
-	 */
+	
+	
+	
 	public Enfermeiro() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -73,21 +60,15 @@ public class Enfermeiro{
 	}
 
 
-	public Long getIdEnfermeiro() {
-		return idEnfermeiro;
-	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public String getSenha() {
-		return senha;
+		return this.senha;
 	}
 
-	public void setIdEnfermeiro(Long idEnfermeiro) {
-		this.idEnfermeiro = idEnfermeiro;
-	}
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -97,16 +78,27 @@ public class Enfermeiro{
 		this.senha = senha;
 	}
 
-	@Override
-	public String toString() {
-		return "Enfermeiro [idEnfermeiro=" + idEnfermeiro + ",nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha + "]";
-	}
 
 	@Override
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "Enfermeiro [nome=" + nome + ", cpf=" + cpf + ", email=" + email + ", senha=" + senha + "]";
+	}
+
+
+
+
+
+
+
+	
 
 
 	

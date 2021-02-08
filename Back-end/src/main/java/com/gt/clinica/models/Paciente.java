@@ -7,8 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "paciente")
 public class Paciente{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -32,23 +34,13 @@ public class Paciente{
 	@Column(nullable = false)
 	private String uf;
 	
-	
-	/**
-	 * @param idPaciente
-	 * @param nome
-	 * @param cpf
-	 * @param dataNasc
-	 * @param peso
-	 * @param altura
-	 * @param uf
-	 */
-	public Paciente(Long idPaciente, String nome, String cpf, LocalDate dataNasc, double peso, double altura,
+	public Paciente(Long idPaciente, String nome, String cpf, String dataNasc, double peso, double altura,
 			String uf) {
 		super();
 		this.idPaciente = idPaciente;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.dataNasc = dataNasc;
+		this.dataNasc = LocalDate.parse(dataNasc);
 		this.peso = peso;
 		this.altura = altura;
 		this.uf = uf;
@@ -58,11 +50,10 @@ public class Paciente{
 	/**
 	 * 
 	 */
-	public Paciente() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+	/*
+	 * public Paciente(String dataNasc) { super(); this.dataNasc =
+	 * LocalDate.parse(dataNasc); // TODO Auto-generated constructor stub }
+	 */
 
 	public String getNome() {
 		// TODO Auto-generated method stub
