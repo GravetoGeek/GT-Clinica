@@ -1,5 +1,6 @@
 package com.gt.clinica.models;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -11,10 +12,10 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "paciente")
-public class Paciente{
+public class Paciente implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long idPaciente;
+	private Long idpaciente;
 	
 	@Column(nullable = false)
 	private String nome;
@@ -23,7 +24,7 @@ public class Paciente{
 	private String cpf;
 	
 	@Column(nullable = false)
-	private LocalDate dataNasc;
+	private String datanasc;
 	
 	@Column(nullable = false)
 	private double peso;
@@ -34,27 +35,35 @@ public class Paciente{
 	@Column(nullable = false)
 	private String uf;
 	
-	public Paciente(Long idPaciente, String nome, String cpf, String dataNasc, double peso, double altura,
+	
+	public Paciente() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Paciente(Long idpaciente, String nome, String cpf, String datanasc, double peso, double altura,
 			String uf) {
 		super();
-		this.idPaciente = idPaciente;
+		this.idpaciente = idpaciente;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.dataNasc = LocalDate.parse(dataNasc);
+		this.datanasc = datanasc;
 		this.peso = peso;
 		this.altura = altura;
 		this.uf = uf;
 	}
-
-
-	/**
-	 * 
-	 */
-	/*
-	 * public Paciente(String dataNasc) { super(); this.dataNasc =
-	 * LocalDate.parse(dataNasc); // TODO Auto-generated constructor stub }
-	 */
-
+	public Paciente(Long idpaciente, String nome, String cpf, LocalDate datanasc, double peso, double altura,
+			String uf) {
+		super();
+		this.idpaciente = idpaciente;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.datanasc = datanasc.toString();
+		this.peso = peso;
+		this.altura = altura;
+		this.uf = uf;
+	}
+	
 	public String getNome() {
 		// TODO Auto-generated method stub
 		return this.nome;
@@ -76,14 +85,13 @@ public class Paciente{
 	}
 	
 
-	public LocalDate getDataNasc() {
-		// TODO Auto-generated method stub
-		return this.dataNasc;
+	public String getDataNasc() {
+		return this.datanasc;
 	}
+	
 
-	public void setDataNasc(LocalDate dataNasc) {
-		// TODO Auto-generated method stub
-		this.dataNasc = dataNasc;
+	public void setDataNasc(String datanasc) {
+		this.datanasc = datanasc;
 	}
 
 	public double getPeso() {
@@ -112,16 +120,16 @@ public class Paciente{
 
 	
 	public Long getIdPaciente() {
-		return idPaciente;
+		return idpaciente;
 	}
 
 	public void setIdPaciente(Long idPaciente) {
-		this.idPaciente = idPaciente;
+		this.idpaciente = idPaciente;
 	}
 
 	@Override
 	public String toString() {
-		return "Paciente [id= "+idPaciente+",nome=" + nome + ", cpf=" + cpf + ", dataNasc=" + dataNasc + ", peso=" + peso + ", altura=" + altura + ", uf=" + uf + "]";
+		return "Paciente [id= "+idpaciente+",nome=" + nome + ", cpf=" + cpf + ", dataNasc=" + datanasc + ", peso=" + peso + ", altura=" + altura + ", uf=" + uf + "]";
 	}
 
 	@Override
@@ -129,7 +137,9 @@ public class Paciente{
 		// TODO Auto-generated method stub
 		return super.equals(obj);
 	}
-	
+
+
+
 	
 	
 

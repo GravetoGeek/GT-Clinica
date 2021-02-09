@@ -10,51 +10,43 @@
   <b-form-select v-model="form.uf" :options="options" required></b-form-select>
   <b-button type="submit" class="w-100 btn btn-lg btn-primary">Cadastrar</b-button>
 </b-form>
-    {{form.nome}}
-    {{form.cpf}}
-    {{form.datanasc}}
-    {{form.peso}}
-    {{form.altura}}
-    {{form.uf}}
   </div>
 </template>
 
 <script>
-import http from "../../../services/config";
 
+import axios from "axios";
 export default {
   name: "CadastroPaciente",
   data(){
     return {
       form:{
-        datanasc:null,
-        altura:null,
-        peso:null,
-        nome:null,
-        cpf:null,
-        uf:null
+        nome:"",
+        cpf:"",
+        datanasc:"",
+        peso:"",
+        altura:"",
+        uf:""
       },
       options:[]
     }
   },
 
   methods:{
-    submit(){
-      http.post('http://localhost:8080/api/pacientes',JSON.parse(this.form),{
-        headers: {
-          // Overwrite Axios's automatically set Content-Type
-          'Content-Type': 'application/json'
-        }
-      }
-      )
-          .then(resposta => {
-            console.log(this.form)
-            console.log(resposta.data)
-          })
+    async submit(){
+      let cadastrar = await axios.post('/pacientes',this.form)
+      .then(resposta =>{
+        console.log(resposta.data)
+      })
+      .catch(e =>{
+        console.log(e)
+      })
+
+      console.log(cadastrar)
     }
   },
   mounted(){
-    http.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+    axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
         .then(resposta => {
           console.log(resposta.data)
               for (const respostaElement of resposta.data) {

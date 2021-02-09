@@ -34,7 +34,7 @@ public class PacienteController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Paciente cadastrar(@RequestBody Paciente paciente) {
-		
+		System.out.println(paciente);
 
 		return pacienteDAO.save(paciente);
 	}

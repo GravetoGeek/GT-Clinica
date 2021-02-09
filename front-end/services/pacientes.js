@@ -1,9 +1,9 @@
-import http from "./config";
-
+import axios from "axios";
 export default {
     listar(){
-        return  http.get('/pacientes')
+        return  axios.get('/pacientes')
     },
+
 
 
 }

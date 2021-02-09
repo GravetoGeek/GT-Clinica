@@ -1,7 +1,5 @@
-import http from "./config";
-
 export default {
     listar(){
-        return  http.get('/medicos')
+        return  this.$http.get('/medicos')
     }
 }

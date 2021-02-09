@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import pacientes from "../../services/pacientes";
 import Navbar from "../components/base/navbar";
 import CadastroPaciente from "../components/forms/CadastroPaciente";
+import axios from "axios";
 
 export default {
 name: "Pacientes",
@@ -17,10 +17,10 @@ name: "Pacientes",
   data(){
     return {
       fields:[
-        {key:"idPaciente",label:"Id",sortable:true},
+        {key:"idpaciente",label:"Id",sortable:true},
         {key:"nome",label:"Nome",sortable:true},
         {key:"cpf",label:"CPF",sortable:false},
-        {key:"dataNasc",label:"Data de Nascimento",sortable:true},
+        {key:"datanasc",label:"Data de Nascimento",sortable:true},
         {key:"peso",label:"Peso",sortable:true},
         {key:"altura",label:"Altura",sortable:true},
         {key:"uf",label:"UF",sortable:true}
@@ -28,12 +28,20 @@ name: "Pacientes",
       items:null
     }
   },
+  methods:{
+    async listar(){
+      return await axios.get('/pacientes')
+          .then(resposta => {
+            console.log(resposta.data)
+            this.items = resposta.data
+          })
+    }
+  },
   mounted() {
-  pacientes.listar()
-    .then(resposta => {
-      this.items = resposta.data
-    })
+    this.listar();
   }
+
+
 }
 </script>
 
